@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 80" width="540" height="80" fill="none">
+  <!-- Crest Icon -->
+  <g transform="translate(10, 6)">
+    <!-- Outer Shield / Laurel Border -->
+    <path d="M34 4 C18 4 6 16 6 34 C6 52 20 62 34 66 C48 62 62 52 62 34 C62 16 50 4 34 4 Z" stroke="#C5A059" stroke-width="1.75" fill="#4A0E17"/>
+    <path d="M34 8 C21 8 11 18 11 34 C11 48 22 57 34 61 C46 57 57 48 57 34 C57 18 47 8 34 8 Z" stroke="#DFC085" stroke-width="0.75" fill="none" stroke-dasharray="2 2"/>
+    <!-- Monogram JB -->
+    <text x="34" y="38" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="19" font-weight="700" fill="#DFC085" text-anchor="middle" letter-spacing="1">JB</text>
+    <text x="34" y="51" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#C5A059" text-anchor="middle" letter-spacing="1.5">1914</text>
+    <!-- Little Star on top -->
+    <path d="M34 1.5 L35.2 3.8 L37.7 4.1 L35.8 5.8 L36.3 8.3 L34 7.1 L31.7 8.3 L32.2 5.8 L30.3 4.1 L32.8 3.8 Z" fill="#D4AF37"/>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(90, 0)">
+    <!-- Main Company Name -->
+    <text x="0" y="34" font-family="'Cinzel', 'Cormorant Garamond', Georgia, serif" font-size="24" font-weight="700" fill="#4A0E17" letter-spacing="2">JHAVERI BROS.</text>
+    <text x="210" y="34" font-family="'Cinzel', 'Cormorant Garamond', Georgia, serif" font-size="14" font-weight="600" fill="#C5A059" letter-spacing="1.5">&amp; CO. PVT. LTD.</text>
+    
+    <!-- Subtitle / Tagline -->
+    <line x1="0" y1="44" x2="390" y2="44" stroke="#C5A059" stroke-width="0.75" opacity="0.6"/>
+    <text x="0" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#756F68" letter-spacing="2.8" text-transform="uppercase">TROPHIES &bull; AWARDS &bull; MEMENTOES &bull; CORPORATE GIFTS</text>
+    <text x="0" y="69" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="500" fill="#9A7736" letter-spacing="1.8">ESTD. 27 JULY 1914 &bull; METRO HOUSE, MUMBAI</text>
+  </g>
+</svg>

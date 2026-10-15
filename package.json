@@ -1,11 +1,11 @@
 {
-  "name": "custom-ink-luxembourg",
+  "name": "jhaveri-bros",
   "version": "1.0.0",
   "private": true,
-  "description": "Custom Ink Luxembourg - Tattoo and Piercing Studio",
+  "description": "Jhaveri Bros. & Co. Pvt. Ltd. - A Legacy of Recognition Since 1914",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

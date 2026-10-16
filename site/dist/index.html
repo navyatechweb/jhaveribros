@@ -325,8 +325,13 @@
           </div>
 
           <!-- Bento Tile 3: Historic Showroom Media Card (Spans 4 columns) -->
-          <div class="bento-col-4 bento-card bento-card-media" style="min-height:300px;">
-            <img src="/assets/shop-BAalPOMI.jpg" alt="Historic showroom of Jhaveri Bros at Metro House Mumbai" class="bento-bg-img" loading="eager">
+          <div class="bento-col-4 bento-card bento-card-media bento-showroom-card" style="min-height:300px; position:relative; overflow:hidden;">
+            <!-- Showroom Image Slider (Right-to-Left Continuous Loop: shop1 to shop5) -->
+            <div class="showroom-slider" id="showroomSlider" aria-hidden="true">
+              <div class="showroom-slide is-active">
+                <img src="/assets/img/history/shop1.jpg" alt="Historic showroom of Jhaveri Bros at Metro House Mumbai" class="showroom-slide-img" loading="eager">
+              </div>
+            </div>
             <div class="bento-overlay"></div>
             <div class="bento-inner">
               <div class="bento-pill pill-light" style="margin-bottom:0.5rem;">SHOWROOM LANDMARK</div>
@@ -432,11 +437,11 @@
 
           <div class="editorial-story-images">
             <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-md);">
-              <img src="/assets/advertisement-BsJTCPL9.jpg" alt="Vintage archival newspaper advertisement of Jhaveri Bros" style="width:100%; height:260px; object-fit:cover;" data-lightbox="/assets/img/history/advertisement.jpg" data-caption="Historic Jhaveri Bros. Press Advertisement">
+              <img src="/assets/img/history/advertisement.jpg" alt="Vintage archival newspaper advertisement of Jhaveri Bros" style="width:100%; height:260px; object-fit:cover;" data-lightbox="/assets/img/history/advertisement.jpg" data-caption="Historic Jhaveri Bros. Press Advertisement">
               <div style="padding:0.75rem; background:#FFF; font-size:0.75rem; font-weight:600; color:var(--color-primary); text-align:center;">Archival Advertisement</div>
             </div>
             <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-md); margin-top:2rem;">
-              <img src="/assets/shop1-BjPYa79k.jpg" alt="Historic showroom interior at Metro House" style="width:100%; height:260px; object-fit:cover;" data-lightbox="/assets/img/history/shop1.jpg" data-caption="Historic Showroom Interior, Metro House">
+              <img src="/assets/img/history/shop1.jpg" alt="Historic showroom interior at Metro House" style="width:100%; height:260px; object-fit:cover;" data-lightbox="/assets/img/history/shop1.jpg" data-caption="Historic Showroom Interior, Metro House">
               <div style="padding:0.75rem; background:#FFF; font-size:0.75rem; font-weight:600; color:var(--color-primary); text-align:center;">Metro House Showroom</div>
             </div>
           </div>
@@ -977,19 +982,19 @@
           </h3>
           <div class="history-gallery-grid">
             <div class="history-gallery-item" data-lightbox="/assets/img/history/shop2.jpg" data-caption="Archival Showroom Interior, Jhaveri Bros. Mumbai">
-              <img src="/assets/shop2-Dfhlxb1h.jpg" alt="Vintage Showroom Interior" loading="lazy">
+              <img src="/assets/img/history/shop2.jpg" alt="Vintage Showroom Interior" loading="lazy">
               <div class="history-gallery-caption">Showroom Display &bull; Metro House</div>
             </div>
             <div class="history-gallery-item" data-lightbox="/assets/img/history/advertisement1.jpg" data-caption="Historic Newspaper Feature & Advertisements">
-              <img src="/assets/advertisement1-BEgOUMws.jpg" alt="Historical Advertisements" loading="lazy">
+              <img src="/assets/img/history/advertisement1.jpg" alt="Historical Advertisements" loading="lazy">
               <div class="history-gallery-caption">Historical Advertisements &bull; Early Catalogues</div>
             </div>
             <div class="history-gallery-item" data-lightbox="/assets/img/history/shop3.jpg" data-caption="Trophy Showroom Cabinets, Jhaveri Bros.">
-              <img src="/assets/shop3-DncSTMQ6.jpg" alt="Showroom Trophy Cabinets" loading="lazy">
+              <img src="/assets/img/history/shop3.jpg" alt="Showroom Trophy Cabinets" loading="lazy">
               <div class="history-gallery-caption">Trophy Display Cabinets &bull; Classic Collection</div>
             </div>
             <div class="history-gallery-item" data-lightbox="/assets/img/history/shop5.jpg" data-caption="Metro House Entrance & Historical Display">
-              <img src="/assets/shop5-DtpnPEA5.jpg" alt="Metro House Entrance Display" loading="lazy">
+              <img src="/assets/img/history/shop5.jpg" alt="Metro House Entrance Display" loading="lazy">
               <div class="history-gallery-caption">Metro House &bull; Showroom Floor</div>
             </div>
           </div>

@@ -2454,6 +2454,7 @@ textarea.form-control {
 
 /* ==========================================================================
    Heritage Seal Card Background Left-to-Right Continuous Loop Animation
+   Slow Smooth Transition & Pan-to-Zoom (Ken Burns Effect)
    ========================================================================== */
 .bento-heritage-seal-card {
   position: relative;
@@ -2483,25 +2484,27 @@ textarea.form-control {
   height: 100%;
   opacity: 0;
   transform: translate3d(100%, 0, 0);
-  transition: transform 1.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, opacity;
+  overflow: hidden;
 }
 
 .heritage-slide.pos-right {
-  transform: translate3d(100%, 0, 0) !important;
   opacity: 0 !important;
+  transform: translate3d(100%, 0, 0) !important;
   transition: none !important;
 }
 
 .heritage-slide.is-active {
-  transform: translate3d(0, 0, 0);
   opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .heritage-slide.pos-left {
-  transform: translate3d(-100%, 0, 0);
   opacity: 0;
-  transition: transform 1.0s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.6s ease;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .heritage-slide-img {
@@ -2510,6 +2513,25 @@ textarea.form-control {
   object-fit: cover;
   object-position: center;
   filter: contrast(1.05) brightness(0.95);
+  transform-origin: center center;
+  transform: scale(1.06) translate3d(4%, 0, 0);
+  will-change: transform;
+}
+
+.heritage-slide.is-active .heritage-slide-img {
+  animation: heritagePanZoom 14s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite;
+}
+
+@keyframes heritagePanZoom {
+  0% {
+    transform: scale(1.06) translate3d(4%, 0, 0);
+  }
+  50% {
+    transform: scale(1.15) translate3d(0%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.24) translate3d(-4%, 1%, 0);
+  }
 }
 
 .heritage-seal-overlay {
@@ -2533,7 +2555,79 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   HERO AMBIENT BACKGROUND SLIDER (COORDINATED WITH CARD HANDOFF)
+   SHOWROOM LANDMARK CARD SLIDER (SHOP 1-5 RIGHT-TO-LEFT INFINITE LOOP)
+   ========================================================================== */
+.showroom-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.showroom-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.showroom-slide.pos-right {
+  opacity: 0 !important;
+  transform: translate3d(100%, 0, 0) !important;
+  transition: none !important;
+}
+
+.showroom-slide.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.showroom-slide.pos-left {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.showroom-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.05) brightness(0.92);
+  transform-origin: center center;
+  transform: scale(1.04) translate3d(3%, 0, 0);
+  will-change: transform;
+}
+
+.showroom-slide.is-active .showroom-slide-img {
+  animation: showroomPanZoom 14s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite;
+}
+
+@keyframes showroomPanZoom {
+  0% {
+    transform: scale(1.04) translate3d(3%, 0, 0);
+  }
+  50% {
+    transform: scale(1.10) translate3d(0%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.16) translate3d(-3%, 1%, 0);
+  }
+}
+
+/* ==========================================================================
+   HERO AMBIENT BACKGROUND SLIDER (COORDINATED SLOW TRANSITION & PAN-TO-ZOOM)
    ========================================================================== */
 .hero-bg-slider {
   position: absolute;
@@ -2553,26 +2647,28 @@ textarea.form-control {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transform: translate3d(100%, 0, 0);
-  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  transform: translate3d(50%, 0, 0);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, opacity;
+  overflow: hidden;
 }
 
 .hero-slide.pos-right {
-  transform: translate3d(100%, 0, 0) !important;
   opacity: 0 !important;
+  transform: translate3d(50%, 0, 0) !important;
   transition: none !important;
 }
 
 .hero-slide.is-active {
-  transform: translate3d(0, 0, 0);
   opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero-slide.pos-left {
-  transform: translate3d(-100%, 0, 0);
   opacity: 0;
-  transition: transform 1.25s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.8s ease;
+  transform: translate3d(-50%, 0, 0);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero-slide-img {
@@ -2581,7 +2677,25 @@ textarea.form-control {
   object-fit: cover;
   object-position: center;
   filter: contrast(1.1) brightness(0.72) saturate(0.85);
-  transform: scale(1.03);
+  transform-origin: center center;
+  transform: scale(1.04) translate3d(3%, 0, 0);
+  will-change: transform;
+}
+
+.hero-slide.is-active .hero-slide-img {
+  animation: heroPanZoom 16s cubic-bezier(0.25, 1, 0.5, 1) alternate infinite;
+}
+
+@keyframes heroPanZoom {
+  0% {
+    transform: scale(1.04) translate3d(3%, 0, 0);
+  }
+  50% {
+    transform: scale(1.11) translate3d(0%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.18) translate3d(-3%, 1%, 0);
+  }
 }
 
 .hero-bg-overlay {

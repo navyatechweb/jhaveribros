@@ -324,8 +324,13 @@
           </div>
 
           <!-- Bento Tile 3: Historic Showroom Media Card (Spans 4 columns) -->
-          <div class="bento-col-4 bento-card bento-card-media" style="min-height:300px;">
-            <img src="/assets/img/history/shop.jpg" alt="Historic showroom of Jhaveri Bros at Metro House Mumbai" class="bento-bg-img" loading="eager">
+          <div class="bento-col-4 bento-card bento-card-media bento-showroom-card" style="min-height:300px; position:relative; overflow:hidden;">
+            <!-- Showroom Image Slider (Right-to-Left Continuous Loop: shop1 to shop5) -->
+            <div class="showroom-slider" id="showroomSlider" aria-hidden="true">
+              <div class="showroom-slide is-active">
+                <img src="/assets/img/history/shop1.jpg" alt="Historic showroom of Jhaveri Bros at Metro House Mumbai" class="showroom-slide-img" loading="eager">
+              </div>
+            </div>
             <div class="bento-overlay"></div>
             <div class="bento-inner">
               <div class="bento-pill pill-light" style="margin-bottom:0.5rem;">SHOWROOM LANDMARK</div>

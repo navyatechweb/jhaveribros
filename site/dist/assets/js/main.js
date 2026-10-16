@@ -10,6 +10,7 @@ function init() {
   initEnquiryForms();
   initMontageViewer();
   initHeritageBgSlider();
+  initShowroomSlider();
   initFloatingWhatsApp();
   initAIAssistant();
 }
@@ -461,7 +462,7 @@ function initHeritageBgSlider() {
           if (oldHeroSlide && oldHeroSlide.parentNode === heroContainer) {
             heroContainer.removeChild(oldHeroSlide);
           }
-        }, 1350);
+        }, 2000);
       }
 
       activeHeroSlide = incomingHeroSlide;
@@ -493,7 +494,6 @@ function initHeritageBgSlider() {
     isTransitioning = true;
 
     // The image currently visible that is about to leave the card
-    const leavingImgSrc = images[currentIndex];
     const nextIndex = (currentIndex + 1) % images.length;
     const nextImgSrc = images[nextIndex];
 
@@ -508,11 +508,11 @@ function initHeritageBgSlider() {
     void incomingSlide.getBoundingClientRect();
 
     requestAnimationFrame(() => {
-      // 1. Incoming card slide glides in from right to center
+      // 1. Incoming card slide glides in from right to center with smooth ease
       incomingSlide.classList.remove('pos-right');
       incomingSlide.classList.add('is-active');
 
-      // 2. Active card slide glides out to left (leaving the card)
+      // 2. Active card slide glides out from center to left
       if (activeSlide) {
         activeSlide.classList.remove('is-active');
         activeSlide.classList.add('pos-left');
@@ -522,27 +522,118 @@ function initHeritageBgSlider() {
           if (oldSlide && oldSlide.parentNode === container) {
             container.removeChild(oldSlide);
           }
-        }, 1100);
+        }, 1800);
       }
 
-      // 3. SYNCHRONIZE HERO BACKGROUND WITH CARD IMAGE (SAME IMAGE, SLIGHT DELAY):
-      // The hero background animates to the exact same image in the exact same manner (right to left),
-      // with a slight delay (280ms) trailing the card.
+      // 3. SYNCHRONIZE HERO BACKGROUND WITH CARD IMAGE (RIGHT-TO-LEFT SMOOTH MOTION)
       setTimeout(() => {
         transferToHeroBackground(nextImgSrc);
-      }, 280);
+      }, 100);
 
       activeSlide = incomingSlide;
       currentIndex = nextIndex;
 
       setTimeout(() => {
         isTransitioning = false;
-      }, 1100);
+      }, 1700);
     });
   }
 
-  // Coordinated periodic loop
-  setInterval(nextSlide, 3600);
+  // Right-to-left smooth animation loop with pan-to-zoom
+  setInterval(nextSlide, 5500);
+}
+
+/* ==========================================================================
+   7. SHOWROOM LANDMARK CARD SLIDER (SHOP 1-5 RIGHT-TO-LEFT INFINITE LOOP)
+   ========================================================================== */
+function initShowroomSlider() {
+  const container = document.getElementById('showroomSlider');
+  if (!container) return;
+
+  const CACHE_BUST = '?v=' + Date.now();
+  const rawImages = [
+    '/assets/img/history/shop1.jpg',
+    '/assets/img/history/shop2.jpg',
+    '/assets/img/history/shop3.jpg',
+    '/assets/img/history/shop4.jpg',
+    '/assets/img/history/shop5.jpg'
+  ];
+  const images = rawImages.map(src => src + CACHE_BUST);
+
+  let currentIndex = 0;
+  let isTransitioning = false;
+
+  const preloadImage = (src) => {
+    const img = new Image();
+    img.src = src;
+  };
+  images.forEach(preloadImage);
+
+  function createSlide(src) {
+    const slide = document.createElement('div');
+    slide.className = 'showroom-slide';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Historic showroom of Jhaveri Bros at 5 Metro House Mumbai';
+    img.className = 'showroom-slide-img';
+    img.loading = 'eager';
+    slide.appendChild(img);
+    return slide;
+  }
+
+  let activeSlide = container.querySelector('.showroom-slide');
+  if (!activeSlide) {
+    activeSlide = createSlide(images[0]);
+    activeSlide.classList.add('is-active');
+    container.appendChild(activeSlide);
+  }
+
+  function nextSlide() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    const nextIndex = (currentIndex + 1) % images.length;
+    const nextImgSrc = images[nextIndex];
+
+    // Preload next image in loop
+    preloadImage(images[(nextIndex + 1) % images.length]);
+
+    const incomingSlide = createSlide(nextImgSrc);
+    incomingSlide.classList.add('pos-right');
+    container.appendChild(incomingSlide);
+
+    // Force layout reflow
+    void incomingSlide.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      // 1. Incoming slide glides into the card from right to center
+      incomingSlide.classList.remove('pos-right');
+      incomingSlide.classList.add('is-active');
+
+      // 2. Active slide glides out from center to left
+      if (activeSlide) {
+        activeSlide.classList.remove('is-active');
+        activeSlide.classList.add('pos-left');
+
+        const oldSlide = activeSlide;
+        setTimeout(() => {
+          if (oldSlide && oldSlide.parentNode === container) {
+            container.removeChild(oldSlide);
+          }
+        }, 1700);
+      }
+
+      activeSlide = incomingSlide;
+      currentIndex = nextIndex;
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 1600);
+    });
+  }
+
+  // Infinite loop - changes slide smoothly every 4.2 seconds
+  setInterval(nextSlide, 4200);
 }
 
 

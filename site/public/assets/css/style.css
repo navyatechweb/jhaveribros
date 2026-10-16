@@ -115,12 +115,12 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -128,7 +128,7 @@ body {
   flex-direction: column;
   position: relative;
   word-wrap: break-word;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 p, h1, h2, h3, h4, h5, h6, a, span, li {
@@ -681,12 +681,13 @@ button, input, select, textarea {
 
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1.5rem;
   width: 100%;
 }
 
 .bento-card {
+  min-width: 0;
   position: relative;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -708,6 +709,7 @@ button, input, select, textarea {
 }
 
 /* Span Utilities */
+.bento-col-12, .bento-col-9, .bento-col-8, .bento-col-7, .bento-col-6, .bento-col-5, .bento-col-4, .bento-col-3 { min-width: 0; }
 .bento-col-12 { grid-column: span 12; }
 .bento-col-9  { grid-column: span 9; }
 .bento-col-8  { grid-column: span 8; }
@@ -1071,6 +1073,7 @@ button, input, select, textarea {
     gap: 1.15rem;
   }
   .bento-card {
+  min-width: 0;
     padding: 1.35rem;
     border-radius: 18px;
   }
@@ -1109,7 +1112,7 @@ button, input, select, textarea {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
@@ -2060,7 +2063,7 @@ textarea.form-control {
 /* --- Gallery & Product Grid Detail --- */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
   gap: 1.75rem;
 }
 
@@ -2215,7 +2218,7 @@ textarea.form-control {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr);
   gap: 2.5rem;
   padding-bottom: 3.5rem;
   border-bottom: 1px solid var(--color-white-gold-border);
@@ -3444,6 +3447,7 @@ textarea.form-control {
   }
 
   .bento-card {
+  min-width: 0;
     padding: 1.25rem 1rem !important;
   }
 
@@ -3530,6 +3534,7 @@ textarea.form-control {
   }
 
   .bento-card {
+  min-width: 0;
     padding: 1rem 0.85rem !important;
   }
 }

@@ -293,9 +293,28 @@ function initEnquiryForms() {
           }
         }
       }
+
+      // Telephone / Mobile validation
+      if (field.type === 'tel' && field.value.trim()) {
+        const digits = field.value.replace(/\D/g, '');
+        if (digits.length < 7 || digits.length > 15) {
+          isValid = false;
+          field.classList.add('error');
+          if (errorMsg) {
+            errorMsg.textContent = 'Please provide a valid contact number (7–15 digits).';
+            errorMsg.classList.add('visible');
+          }
+        }
+      }
     });
 
     if (!isValid) {
+      const statusBox = enquiryForm.querySelector('.form-status');
+      if (statusBox) {
+        statusBox.className = 'form-status error';
+        statusBox.style.display = 'block';
+        statusBox.innerHTML = `<strong>Submission Error:</strong> We couldn't submit your enquiry right now. Please check your details and try again, or contact us directly by phone or email.`;
+      }
       const firstError = enquiryForm.querySelector('.form-control.error');
       firstError?.focus();
       return;
@@ -304,7 +323,7 @@ function initEnquiryForms() {
     const submitBtn = enquiryForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span>Formatting for WhatsApp...</span>`;
+    submitBtn.innerHTML = `<span>Submitting enquiry...</span>`;
 
     // Extract all form values
     const formData = new FormData(enquiryForm);
@@ -353,11 +372,15 @@ function initEnquiryForms() {
         statusBox.className = 'form-status success';
         statusBox.style.display = 'block';
         statusBox.innerHTML = `
-          <strong>Enquiry Formatted for WhatsApp!</strong> Thank you, ${fullName}. Your details have been formatted and dispatched to Jhaveri Bros. WhatsApp Quotation Desk (<strong>+91 93554 12903</strong>).
-          <div style="margin-top:0.85rem;">
+          <strong>Enquiry Submitted Successfully!</strong> Thank you for contacting Jhaveri Bros. Your enquiry has been submitted successfully.
+          <p style="margin-top:0.4rem; font-size:0.875rem; color:#2D3748;">Our team will review your specifications and contact you with an itemized quotation. You may also continue directly to our WhatsApp quotation desk (+91 93554 12903) below.</p>
+          <div style="margin-top:0.85rem; display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
             <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-gold" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none;">
-              <span>Continue to WhatsApp (+91 93554 12903)</span> &rarr;
+              <span>Continue in WhatsApp (+91 93554 12903)</span> &rarr;
             </a>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').reset(); this.closest('.form-status').style.display='none';">
+              Submit Another Enquiry
+            </button>
           </div>
         `;
       }

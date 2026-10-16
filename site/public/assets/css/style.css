@@ -871,16 +871,38 @@ button, input, select, textarea {
   transform: scale(1.05);
 }
 
-/* Continuous Loop Slider for Service Cards (Laser Engraver, Etching, etc.) */
+/* Service Card Image Frames & Continuous Loop Sliders (Laser Engraver, Etching, etc.) */
+.service-card-frame,
 .loop-slider,
 .laser-loop-slider {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 210px;
   overflow: hidden;
   border-radius: var(--radius-bento-sm);
-  background: #FFFFFF;
-  border: 1px solid var(--color-border);
+  background: #24070B;
+  border: 1px solid rgba(216, 206, 175, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.15rem;
+  box-sizing: border-box;
+}
+
+.service-card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: zoom-in;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.bento-card:hover .service-card-frame img {
+  transform: scale(1.04);
 }
 
 .loop-slider .loop-slide,
@@ -895,27 +917,39 @@ button, input, select, textarea {
   box-sizing: border-box;
   opacity: 0;
   cursor: zoom-in;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s ease-in-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
+/* CRITICAL: First slide is ALWAYS 100% visible by default as base state so card is NEVER a blank container */
+.loop-slider .loop-slide-1,
+.laser-loop-slider .laser-slide-1,
+.loop-slider .loop-slide:first-of-type,
+.laser-loop-slider .laser-slide:first-of-type {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* 2-Slide continuous loop fade (Laser, Etching, Screen Printing, Foil) */
 .loop-slider .loop-slide-1,
 .laser-loop-slider .laser-slide-1 {
-  animation: laserLoopFade1 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: laserLoopFade1 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .loop-slider .loop-slide-2,
 .laser-loop-slider .laser-slide-2 {
-  animation: laserLoopFade2 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: laserLoopFade2 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes laserLoopFade1 {
-  0%, 46% {
+  0%, 45% {
     opacity: 1;
     z-index: 2;
     transform: scale(1);
     pointer-events: auto;
   }
-  50%, 96% {
+  50%, 95% {
     opacity: 0;
     z-index: 1;
     transform: scale(1.02);
@@ -930,13 +964,13 @@ button, input, select, textarea {
 }
 
 @keyframes laserLoopFade2 {
-  0%, 46% {
+  0%, 45% {
     opacity: 0;
     z-index: 1;
     transform: scale(1.02);
     pointer-events: none;
   }
-  50%, 96% {
+  50%, 95% {
     opacity: 1;
     z-index: 2;
     transform: scale(1);
@@ -950,60 +984,90 @@ button, input, select, textarea {
   }
 }
 
-/* 4-Slide Continuous Loop Slider (e.g. Embossing 4 medals) */
+/* 4-Slide Continuous Loop Slider (Embossing) */
 .loop-slider-4 .loop-slide-1 {
-  animation: loopFade4_1 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: loopFade4_1 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 .loop-slider-4 .loop-slide-2 {
-  animation: loopFade4_2 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: loopFade4_2 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 .loop-slider-4 .loop-slide-3 {
-  animation: loopFade4_3 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: loopFade4_3 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 .loop-slider-4 .loop-slide-4 {
-  animation: loopFade4_4 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: loopFade4_4 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes loopFade4_1 {
-  0%, 21% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
-  25%, 96% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
+  0%, 22% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
+  25%, 97% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
   100% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
 }
 
 @keyframes loopFade4_2 {
-  0%, 21% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
-  25%, 46% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
+  0%, 22% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
+  25%, 47% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
   50%, 100% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
 }
 
 @keyframes loopFade4_3 {
-  0%, 46% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
-  50%, 71% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
+  0%, 47% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
+  50%, 72% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
   75%, 100% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
 }
 
 @keyframes loopFade4_4 {
-  0%, 71% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
-  75%, 96% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
+  0%, 72% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
+  75%, 97% { opacity: 1; z-index: 2; transform: scale(1); pointer-events: auto; }
   100% { opacity: 0; z-index: 1; transform: scale(1.02); pointer-events: none; }
 }
 
+/* Pause animations when hovering to comfortably inspect samples */
+.loop-slider:hover .loop-slide,
+.laser-loop-slider:hover .laser-slide,
+.bento-card:hover .loop-slide,
+.bento-card:hover .laser-slide,
+.service-process-row:hover .loop-slide,
+.service-process-row:hover .laser-slide {
+  animation-play-state: paused;
+}
+
+/* Sample Count Badge - Compact, sleek, never wraps */
 .loop-badge,
 .laser-loop-badge {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(10, 8, 9, 0.78);
-  backdrop-filter: blur(4px);
+  background: rgba(18, 5, 8, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--color-white-gold-bright);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
   border: 1px solid var(--color-white-gold-border);
+  white-space: nowrap;
+  max-width: calc(100% - 16px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  line-height: 1.2;
+}
+
+.loop-badge::before,
+.laser-loop-badge::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold-light);
+  box-shadow: 0 0 6px var(--color-gold);
 }
 
 /* Bento Stat Displays */
@@ -1063,7 +1127,8 @@ button, input, select, textarea {
     grid-column: span 12;
   }
   .bento-col-5,
-  .bento-col-4 {
+  .bento-col-4,
+  .bento-col-3 {
     grid-column: span 6;
   }
 }
@@ -1073,9 +1138,10 @@ button, input, select, textarea {
     gap: 1.15rem;
   }
   .bento-card {
-  min-width: 0;
-    padding: 1.35rem;
+    min-width: 0;
+    padding: 1.25rem 1rem !important;
     border-radius: 18px;
+    height: auto !important;
   }
   .bento-col-12,
   .bento-col-9,
@@ -1085,14 +1151,19 @@ button, input, select, textarea {
   .bento-col-5,
   .bento-col-4,
   .bento-col-3 {
-    grid-column: span 12;
+    grid-column: span 12 !important;
   }
   .bento-row-2,
   .bento-row-3 {
     grid-row: auto;
   }
   .bento-card-media {
-    min-height: 300px;
+    min-height: 280px;
+  }
+  .service-card-frame,
+  .loop-slider,
+  .laser-loop-slider {
+    height: 210px !important;
   }
 }
 
@@ -2431,12 +2502,17 @@ textarea.form-control {
     gap: 0.75rem;
   }
   .service-process-row .laser-loop-slider,
-  .service-process-row .loop-slider {
+  .service-process-row .loop-slider,
+  .service-process-row .service-card-frame {
     height: 260px;
+    width: 100%;
+    margin-bottom: 0;
   }
   .service-process-row img {
+    width: 100%;
+    height: 100%;
     max-height: 260px;
-    object-fit: cover;
+    object-fit: contain !important;
   }
 }
 
@@ -3548,6 +3624,31 @@ textarea.form-control {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .loop-slider .loop-slide,
+  .laser-loop-slider .laser-slide {
+    animation: none !important;
+  }
+
+  .loop-slider .loop-slide-1,
+  .laser-loop-slider .laser-slide-1,
+  .loop-slider .loop-slide:first-of-type,
+  .laser-loop-slider .laser-slide:first-of-type {
+    opacity: 1 !important;
+    z-index: 2 !important;
+    display: block !important;
+  }
+
+  .loop-slider .loop-slide:not(:first-of-type),
+  .laser-loop-slider .laser-slide:not(:first-of-type) {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  .loop-badge,
+  .laser-loop-badge {
+    display: none !important;
   }
 
   .jb-floating-whatsapp,

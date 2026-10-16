@@ -7,6 +7,7 @@ function init() {
   initNavigation();
   initOperatingHours();
   initLightbox();
+  initImageFallbacks();
   initEnquiryForms();
   initMontageViewer();
   initHeritageBgSlider();
@@ -214,6 +215,48 @@ function initLightbox() {
       if (src) openLightbox(src, caption);
     });
   });
+}
+
+/* ==========================================================================
+   3B. IMAGE ERROR HANDLING & BRANDED ARCHIVAL FALLBACK
+   ========================================================================== */
+function initImageFallbacks() {
+  const fallbackSvg = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+      <rect width="100%" height="100%" fill="#2A080C"/>
+      <rect x="20" y="20" width="560" height="360" fill="none" stroke="#D8CEAF" stroke-width="1.5" stroke-opacity="0.3" stroke-dasharray="6,4"/>
+      <g transform="translate(300, 175)" text-anchor="middle">
+        <circle cx="0" cy="-30" r="28" fill="none" stroke="#D8CEAF" stroke-width="1.5"/>
+        <text y="-24" font-family="'Cinzel', serif" font-size="16" font-weight="700" fill="#D8CEAF" letter-spacing="2">JB</text>
+        <text y="25" font-family="'Cinzel', serif" font-size="15" font-weight="600" fill="#EAE5D8" letter-spacing="1.5">JHAVERI BROS. &amp; CO.</text>
+        <text y="48" font-family="'Marcellus', serif" font-size="12" fill="#D8CEAF" letter-spacing="1">ARCHIVAL CRAFTSMANSHIP SAMPLES</text>
+        <text y="70" font-family="sans-serif" font-size="11" fill="rgba(234, 229, 216, 0.6)">Sample photo available in showroom archive</text>
+      </g>
+    </svg>
+  `);
+
+  const handleImgError = (img) => {
+    if (!img.getAttribute('data-fallback-applied')) {
+      img.setAttribute('data-fallback-applied', 'true');
+      img.src = fallbackSvg;
+      img.style.objectFit = 'contain';
+      img.style.opacity = '1';
+    }
+  };
+
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalWidth === 0) {
+      handleImgError(img);
+    } else {
+      img.addEventListener('error', () => handleImgError(img));
+    }
+  });
+
+  window.addEventListener('error', (e) => {
+    if (e.target && e.target.tagName === 'IMG') {
+      handleImgError(e.target);
+    }
+  }, true);
 }
 
 /* ==========================================================================
